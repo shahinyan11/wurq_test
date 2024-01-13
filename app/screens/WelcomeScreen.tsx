@@ -24,6 +24,10 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
     navigation.navigate("Demo", { screen: "DemoShowroom", params: {} })
   }
 
+  function goWurqScreen() {
+    navigation.navigate("Wurq")
+  }
+
   useHeader(
     {
       rightTx: "common.logOut",
@@ -51,6 +55,12 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
       <View style={[$bottomContainer, $bottomContainerInsets]}>
         <Text tx="welcomeScreen.postscript" size="md" />
 
+        <Button
+          testID="next-screen-button"
+          preset="reversed"
+          text="Go to Wurq"
+          onPress={goWurqScreen}
+        />
         <Button
           testID="next-screen-button"
           preset="reversed"
