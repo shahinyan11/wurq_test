@@ -8,8 +8,9 @@
 import { ApiResponse, ApisauceInstance, create } from "apisauce"
 import Config from "../../config"
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
-import type { ApiConfig, ApiFeedResponse } from "./api.types"
+import { ApiConfig, ApiFeedResponse, ApiHistoryResponse } from "./api.types"
 import type { EpisodeSnapshotIn } from "../../models/Episode"
+import { HistoryStoreSnapshotIn } from "app/models/HistoryStore"
 
 /**
  * Configuring the apisauce instance.
@@ -67,6 +68,48 @@ export class Api {
         })) ?? []
 
       return { kind: "ok", episodes }
+    } catch (e) {
+      if (__DEV__ && e instanceof Error) {
+        console.error(`Bad data: ${e.message}\n${response.data}`, e.stack)
+      }
+      return { kind: "bad-data" }
+    }
+  }
+
+  /**
+   * Gets history data.
+   */
+  async getHistory(): Promise<
+    | {
+        kind: "ok"
+        history: HistoryStoreSnapshotIn["history"]
+        pointsPerWod: HistoryStoreSnapshotIn["pointsPerWod"]
+      }
+    | GeneralApiProblem
+  > {
+    const response: ApiResponse<ApiHistoryResponse> = await this.apisauce.get(`Prod/history`)
+
+    // the typical ways to die when calling an api
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    // transform the data into the format we are expecting
+    try {
+      const historyItem = response.data?.history[0]
+
+      const history = {
+        dateTime: historyItem?.date_time,
+        ...historyItem,
+      } as HistoryStoreSnapshotIn["history"]
+
+      const pointsPerWod = response.data?.points_per_wod.map((item, index) => ({
+        x: index + 1,
+        y: item,
+      }))
+
+      return { kind: "ok", history, pointsPerWod }
     } catch (e) {
       if (__DEV__ && e instanceof Error) {
         console.error(`Bad data: ${e.message}\n${response.data}`, e.stack)

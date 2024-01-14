@@ -49,6 +49,15 @@ const fonts = {
     // Android only font.
     normal: "monospace",
   },
+  montserrat: {
+    light: "Montserrat-Regular",
+    thin: "Montserrat-Thin",
+    normal: "Montserrat-Regular",
+    medium: "Montserrat-Medium",
+    semiBold: "Montserrat-SamiBold",
+    bold: "Montserrat-Bold",
+    extraBold: "Montserrat-ExtraBold",
+  },
 }
 
 export const typography = {
@@ -59,7 +68,7 @@ export const typography = {
   /**
    * The primary font. Used in most places.
    */
-  primary: fonts.spaceGrotesk,
+  primary: fonts.montserrat,
   /**
    * An alternate font used for perhaps titles and stuff.
    */

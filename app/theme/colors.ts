@@ -29,12 +29,17 @@ const palette = {
   accent300: "#FDD495",
   accent400: "#FBC878",
   accent500: "#FFBB50",
+  accent600: "#A8FF89",
 
   angry100: "#F2D6CD",
   angry500: "#C03403",
 
   overlay20: "rgba(25, 16, 21, 0.2)",
   overlay50: "rgba(25, 16, 21, 0.5)",
+
+  textGray: "#7B7B7B",
+  textGrayLite: "#8C8279",
+
 } as const
 
 export const colors = {
@@ -55,7 +60,7 @@ export const colors = {
   /**
    * Secondary text information.
    */
-  textDim: palette.neutral600,
+  textDim: "#7B7B7B",
   /**
    * The default color of the screen background.
    */
@@ -78,7 +83,30 @@ export const colors = {
   error: palette.angry500,
   /**
    * Error Background.
-   *
    */
   errorBackground: palette.angry100,
+  /**
+   * The default shadow color.
+   */
+  shadow: "rgba(0, 0, 0, 0.9)",
+  /**
+   * The dark background.
+   */
+  darkBackground: "#333F48",
+  /**
+   * The dark card color.
+   */
+  cardDark: "#20262A",
+
+  /**
+   * The text colors.
+   */
+  textGray: palette.textGray,
+  textGrayLite: palette.textGrayLite,
+  textAccent: palette.accent600,
+
+  /**
+   * The default input background color.
+   */
+  inputBackground: "#1F262B",
 }

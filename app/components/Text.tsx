@@ -3,6 +3,7 @@ import React from "react"
 import { StyleProp, Text as RNText, TextProps as RNTextProps, TextStyle } from "react-native"
 import { isRTL, translate, TxKeyPath } from "../i18n"
 import { colors, typography } from "../theme"
+import { scaledFontSize } from "app/utils/scaledSizes"
 
 type Sizes = keyof typeof $sizeStyles
 type Weights = keyof typeof typography.primary
@@ -73,13 +74,13 @@ export function Text(props: TextProps) {
 }
 
 const $sizeStyles = {
-  xxl: { fontSize: 36, lineHeight: 44 } satisfies TextStyle,
-  xl: { fontSize: 24, lineHeight: 34 } satisfies TextStyle,
-  lg: { fontSize: 20, lineHeight: 32 } satisfies TextStyle,
-  md: { fontSize: 18, lineHeight: 26 } satisfies TextStyle,
-  sm: { fontSize: 16, lineHeight: 24 } satisfies TextStyle,
-  xs: { fontSize: 14, lineHeight: 21 } satisfies TextStyle,
-  xxs: { fontSize: 12, lineHeight: 18 } satisfies TextStyle,
+  xxl: { fontSize: scaledFontSize(32) } satisfies TextStyle,
+  xl: { fontSize: scaledFontSize(24) } satisfies TextStyle,
+  lg: { fontSize: scaledFontSize(20) } satisfies TextStyle,
+  md: { fontSize: scaledFontSize(18) } satisfies TextStyle,
+  sm: { fontSize: scaledFontSize(16) } satisfies TextStyle,
+  xs: { fontSize: scaledFontSize(14) } satisfies TextStyle,
+  xxs: { fontSize: scaledFontSize(12) } satisfies TextStyle,
 }
 
 const $fontWeightStyles = Object.entries(typography.primary).reduce((acc, [weight, fontFamily]) => {
