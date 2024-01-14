@@ -15,12 +15,7 @@ const initHistory = {
 export const HistoryStoreModel = types
   .model("HistoryStore")
   .props({
-    pointsPerWod: types.array(
-      types.model({
-        x: types.number,
-        y: types.number,
-      }),
-    ),
+    pointsPerWod: types.array(types.model({ y: types.number })),
     history: types.optional(
       types.model({
         dateTime: types.string,

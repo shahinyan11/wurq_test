@@ -104,8 +104,7 @@ export class Api {
         ...historyItem,
       } as HistoryStoreSnapshotIn["history"]
 
-      const pointsPerWod = response.data?.points_per_wod.map((item, index) => ({
-        x: index + 1,
+      const pointsPerWod = response.data?.points_per_wod.map((item) => ({
         y: item,
       }))
 

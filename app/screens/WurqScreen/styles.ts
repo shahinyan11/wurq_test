@@ -1,11 +1,16 @@
 import { StyleSheet } from "react-native"
-import { colors } from "app/theme"
+import { colors, typography } from "app/theme"
 import { scaledFontSize, scaledSize } from "app/utils/scaledSizes"
 
 const styles = StyleSheet.create({
   bigText: {
     color: colors.palette.neutral100,
+    fontFamily: typography.primary.normal,
+    fontSize: scaledFontSize(20),
+    fontWeight: "500",
+    letterSpacing: 0.38,
     marginLeft: 30,
+    textDecorationLine: "underline",
   },
   button: {
     borderRadius: scaledSize(11),
@@ -72,6 +77,9 @@ const styles = StyleSheet.create({
   },
   middleText: {
     color: colors.palette.neutral100,
+    fontFamily: typography.primary.normal,
+    fontSize: scaledFontSize(15),
+    fontWeight: "600",
     marginLeft: 35,
   },
 

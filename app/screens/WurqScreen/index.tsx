@@ -3,11 +3,12 @@ import { observer } from "mobx-react-lite"
 import { Image, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Button, Chart, Screen, Text, TextField } from "app/components"
-import Card from "./Card"
-import styles from "./styles"
-import { colors } from "app/theme"
-import { useStores } from "app/models"
 import LinearGradient from "react-native-linear-gradient"
+
+import { useStores } from "app/models"
+import { colors } from "app/theme"
+import styles from "./styles"
+import Card from "./Card"
 
 const logoImage = require("assets/images/wurq-logo.png")
 
@@ -24,12 +25,17 @@ export const WurqScreen: FC<WurqScreenProps> = observer(function WurqScreen() {
       await historyStore.fetchHistory()
     })()
 
-    setPoints(history?.points)
-    setName(history?.name)
+    setPoints(history.points)
+    setName(history.name)
   }, [historyStore])
 
   function handleEditHistory() {
     historyStore.editHistory({ name, points: +points })
+  }
+
+  function handleChangeName(text: string) {
+    const filteredText = text.replace(/[^a-zA-Z\s]/g, "")
+    setName(filteredText)
   }
 
   return (
@@ -67,7 +73,7 @@ export const WurqScreen: FC<WurqScreenProps> = observer(function WurqScreen() {
         <TextField
           label="Name"
           value={name}
-          onChangeText={setName}
+          onChangeText={handleChangeName}
           inputWrapperStyle={styles.inputWrapper}
           style={styles.inputStyle}
           LabelTextProps={{ style: styles.inputLabel }}
