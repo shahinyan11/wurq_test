@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useCallback, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { Image, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
@@ -29,14 +29,14 @@ export const WurqScreen: FC<WurqScreenProps> = observer(function WurqScreen() {
     setName(history.name)
   }, [historyStore])
 
-  function handleEditHistory() {
+  const handleEditHistory = useCallback(() => {
     historyStore.editHistory({ name, points: +points })
-  }
+  }, [name, points])
 
-  function handleChangeName(text: string) {
+  const handleChangeName = useCallback((text: string) => {
     const filteredText = text.replace(/[^a-zA-Z\s]/g, "")
     setName(filteredText)
-  }
+  }, [])
 
   return (
     <Screen
